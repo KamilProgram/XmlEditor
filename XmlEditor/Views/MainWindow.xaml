@@ -1,0 +1,230 @@
+﻿<Window x:Class="XmlEditor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
+        xmlns:local="clr-namespace:XmlEditor"
+        xmlns:vm="clr-namespace:XmlEditor.ViewModels"
+        xmlns:dd="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop"
+        mc:Ignorable="d"
+        MinWidth="600"
+        MinHeight="344" 
+        Icon="/icon.ico"
+        Title="SPOEditor" 
+        Style="{StaticResource VS2012WindowStyle}"
+        x:Name="Mainwindow"
+        d:DesignWidth="1920" d:DesignHeight="1080" 
+        WindowState="Maximized">
+    <!--
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Colse" Executed="{}"
+    </Window.CommandBindings>-->
+    <Window.DataContext>
+        <vm:MainWindowViewModel x:Name="ViewModel"/>
+    </Window.DataContext>
+
+    <Window.InputBindings>
+        <KeyBinding Gesture="Ctrl+S" Command="{Binding SaveCommand}"/>
+        <KeyBinding Gesture="Ctrl+F" Command="{Binding FindCommand}"/>
+        <KeyBinding Gesture="Ctrl+H" Command="{Binding ChangeCommand}"/>
+        
+        <KeyBinding Gesture="F5" Command="{Binding TransformCommand}"/>
+        <KeyBinding Gesture="F2" Command="{Binding RenameCommand}"/>
+    </Window.InputBindings>
+      <!--<i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <i:InvokeCommandAction 
+                Command="{Binding ClosingWindow}"/>
+        </i:EventTrigger>
+       
+        <i:EventTrigger EventName="Closed">
+            <i:InvokeCommandAction 
+                Command="{Binding ClosedWindow}"/>
+        </i:EventTrigger>
+        
+    </i:Interaction.Triggers> -->
+
+    <Window.Resources>
+
+    </Window.Resources>
+    <DockPanel Background="{StaticResource DarkBrush1}">
+
+      <!--  <StackPanel DockPanel.Dock="Top" Background="{StaticResource DarkBrush4}">
+            <ContentControl Content="{StaticResource TopMenu}"/>
+        </StackPanel>-->
+
+        <Grid DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="SideBar">
+                    <ColumnDefinition.Style>
+                        <Style TargetType="{x:Type ColumnDefinition}">
+                            <Style.Setters>
+                                <Setter Property="Width" Value="233"/>
+                            </Style.Setters>
+                            <Style.Triggers>
+                                <!--<DataTrigger Binding="{Binding ElementName=  CollapseExploer, Path=IsChecked}" Value="False">-->
+                                <DataTrigger Binding="{Binding WorkspaceVisible}" Value="False">
+                                    <DataTrigger.Setters>
+                                        <Setter Property="Width" Value="0"/>
+                                        <Setter Property="MaxWidth" Value="0"/>
+                                    </DataTrigger.Setters>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ColumnDefinition.Style>
+                </ColumnDefinition>
+                <ColumnDefinition x:Name="SideBarSpliter">
+                    <ColumnDefinition.Style>
+                        <Style TargetType="{x:Type ColumnDefinition}">
+                            <Style.Setters>
+                                <Setter Property="Width" Value="auto"/>
+                            </Style.Setters>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding WorkspaceVisible}" Value="False">
+                                    <DataTrigger.Setters>
+                                        <Setter Property="Width" Value="0"/>
+                                        <Setter Property="MaxWidth" Value="0"/>
+                                    </DataTrigger.Setters>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ColumnDefinition.Style>
+                </ColumnDefinition>
+                <ColumnDefinition x:Name="TextPanel" Width="*" MinWidth="380"/>
+                <!--
+                
+                -->
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto">
+                    <RowDefinition.Style>
+                        <Style TargetType="{x:Type RowDefinition}">
+                            <Style.Setters>
+                               <!-- <Setter Property="Width" Value="*"/>
+                                <Setter Property="MinWidth" Value="200"/>-->
+                            </Style.Setters>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ToolsVisible}" Value="False">
+                                    <DataTrigger.Setters>
+                                        <Setter Property="MinHeight" Value="0"/>
+                                        <Setter Property="Height" Value="0"/>
+                                        <Setter Property="MaxHeight" Value="0"/>
+                                    </DataTrigger.Setters>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </RowDefinition.Style>
+                </RowDefinition>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <ContentControl Content="{StaticResource WorkTool}" Grid.ColumnSpan="3" Grid.Column="0" />
+            
+            <!--<ContentControl Content="{StaticResource RenderTool}" Grid.Column="4" Grid.Row="0"/>-->
+
+            <ContentControl Grid.Column="0" Grid.Row="1" Content="{StaticResource Workspace}"/>
+
+            <GridSplitter Grid.Column="1" Grid.Row="1"
+                          HorizontalAlignment="Center" VerticalAlignment="Stretch" 
+                          Width="4px" Background="Transparent"/>
+            <Grid  Grid.Column="2" Grid.Row="1"   dd:DragDrop.DropHandler="{Binding}"  
+                                 dd:DragDrop.IsDropTarget="True" >
+                <!-- 
+
+                <ContentControl  Content="{StaticResource TextPanel}"/>-->
+
+                <TabControl 
+                    ItemsSource="{Binding Items}"
+                    SelectedItem="{Binding SelectedItem}" 
+                    SelectedIndex="{Binding SelectedItemIndex}"
+                    Style="{StaticResource MyTabControl}">
+
+                    <TabControl.Resources>
+                        <Style TargetType="{x:Type TabItem}" BasedOn="{StaticResource MyTabStyle}">
+                            <Setter Property="ContentTemplate">
+                                <Setter.Value>
+                                    <DataTemplate>
+                                        <Grid    >
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition  Name="TextPanelSpliter">
+                                                    <ColumnDefinition.Style>
+                                                        <Style TargetType="{x:Type ColumnDefinition}" BasedOn="{StaticResource ResourceKey=ColTextPanelSpliter}">
+                                                            <Style.Setters>
+                                                                <Setter Property="Width" Value="auto"/>
+                                                            </Style.Setters>
+                                                        </Style>
+                                                    </ColumnDefinition.Style>
+                                                </ColumnDefinition>
+
+                                                <ColumnDefinition Name="RenderPanel">
+                                                    <ColumnDefinition.Style>
+                                                        <Style TargetType="{x:Type ColumnDefinition}" BasedOn="{StaticResource ResourceKey=ColRenderPanel}">
+                                                            <Style.Setters>
+                                                                <Setter Property="Width" Value="*"/>
+                                                                <Setter Property="MinWidth" Value="200"/>
+                                                            </Style.Setters>
+                                                        </Style>
+                                                    </ColumnDefinition.Style>
+
+                                                </ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+
+
+                                            <ContentControl Grid.Column="0" Content="{StaticResource TextEditor}" />
+
+                                            <GridSplitter Grid.Column="1" Width="4" HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="-4,0,0,0" Background="Transparent"/>
+
+                                            <ContentControl Grid.Column="2" Content="{StaticResource RenderPanel}">
+
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseDoubleClick">
+                                                        <i:InvokeCommandAction               
+                             Command="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.CurrentPageTab}"/>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </ContentControl>
+
+                                        </Grid>
+                                    </DataTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </TabControl.Resources>
+
+                    <!-- <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding TransformTabCommand}" CommandParameter="SelectedItem"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>-->
+                </TabControl>
+
+            </Grid>
+                <!--<GridSplitter Grid.Column="3" Grid.Row="1" ShowsPreview="True" 
+                          HorizontalAlignment="Center" VerticalAlignment="Stretch" 
+                          Padding="0" Width="4px" Margin="-4,0,0,0" Background="Transparent"/>
+
+            <Border   
+                     dd:DragDrop.IsDropTarget="True"
+                     dd:DragDrop.DropHandler="{Binding}"
+                     Visibility="{Binding ElementName=BrowserVisible,Path=IsChecked,Converter={StaticResource btv}}">
+            </Border>
+            
+                <Frame Grid.Column="4" Grid.Row="1" Content="{Binding CurrentPage}" NavigationUIVisibility="Hidden" Background="{StaticResource DarkBrush1}"
+                       dd:DragDrop.IsDropTarget="True"
+                       dd:DragDrop.DropHandler="{Binding}">
+
+                    
+                <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <i:InvokeCommandAction 
+                   Command="{Binding CurrentPageTab}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Frame>-->
+
+
+        </Grid>
+    </DockPanel>
+</Window>

@@ -1,0 +1,126 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:XmlEditor.Views.Resources"
+                    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+                    x:Class="XmlEditor.Views.Resources.ListBox"
+                    x:ClassModifier="public">
+    <Style TargetType="ListBoxItem" x:Key="MyListItem">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Grid Name="Panel">
+                        <StackPanel Margin="16,0,0,0" Orientation="Horizontal" Height="24" VerticalAlignment="Center">
+                            <Button Style="{StaticResource CleanBtn}"  Foreground="{TemplateBinding Foreground}" 
+                                        Command="{Binding DataContext.CloseItemCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
+                                        CommandParameter="{Binding}"
+                                    Height="20" Width="20">
+                                <ContentControl Name="closeBtn" Style="{StaticResource closeTab}" Margin="3.3"/>
+                            </Button>
+                            <ContentControl  Style="{StaticResource text}" Height="8" Margin="3"/>
+
+                            <Grid Name="Header">
+                                
+                                <TextBlock Name="StaticName" VerticalAlignment="Center" Text="{Binding Header}" FontSize="12" FontWeight="Medium" >
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsPreview}" Value="True">
+                                                    <Setter Property="FontStyle" Value="Italic"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+
+                                <TextBox  x:Name="ReNameMod" IsVisibleChanged="ReNameMod_IsVisibleChanged" VerticalAlignment="Center" Text="{Binding Header, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="12" FontWeight="Medium" Visibility="Hidden" >
+                                    <TextBox.InputBindings>
+                                        <KeyBinding Key="Enter" Command="{Binding DataContext.RenameStop, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" CommandParameter="{Binding}"/>
+
+                                        <KeyBinding Key="Esc"   Command="{Binding DataContext.RenameCancel, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" CommandParameter="{Binding}"/>
+
+                                    </TextBox.InputBindings>
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="LostFocus">
+                                            <i:InvokeCommandAction
+                                                Command="{Binding DataContext.RenameCancel, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
+                                                CommandParameter="{Binding}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </TextBox>
+                            </Grid>
+
+                            <TextBlock VerticalAlignment="Center" Text="{Binding Path}" Margin="5,0,0,0" FontWeight="Medium" Foreground="{StaticResource DarkBrush6}" FontSize="12"/>
+
+                        </StackPanel>
+                        <Grid.InputBindings>
+                            <MouseBinding MouseAction="LeftDoubleClick"
+                                              Command="{Binding DataContext.LoadXml, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
+                                              CommandParameter="{Binding}"/>
+                            
+                        </Grid.InputBindings>
+
+                  
+
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Foreground" Value="{StaticResource LightBrush3}"/>
+                            <Setter TargetName="Panel" Property="Background" Value="{StaticResource DarkBrush2}"/>
+                        </Trigger>
+
+                        <Trigger Property="IsSelected" Value="False">
+                            <Setter TargetName="closeBtn" Property="Visibility" Value="Hidden"/>
+                            <Setter Property="Foreground" Value="{StaticResource LightBrush1}"/>
+                            <Setter TargetName="Panel" Property="Background" Value="{StaticResource DarkBrush3}" />
+                        </Trigger>
+
+                        <DataTrigger Binding="{Binding IsChangedText}" Value="true">
+                            <Setter TargetName="closeBtn" Property="Style" Value="{StaticResource circle}"/>
+                            <Setter TargetName="closeBtn" Property="Margin" Value="3.8"/>
+                            <Setter TargetName="closeBtn" Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+
+
+
+                        <DataTrigger Binding="{Binding IsRename}" Value="true">
+                            <Setter TargetName="StaticName" Property="Visibility" Value="Hidden"/>
+                            <Setter TargetName="ReNameMod" Property="Visibility" Value="Visible"/>
+           
+                        </DataTrigger>
+                            
+                        
+                        <DataTrigger Binding="{Binding IsRename}" Value="false">
+                            <Setter TargetName="StaticName" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="ReNameMod" Property="Visibility" Value="Hidden"/>
+                        </DataTrigger>
+                        
+                        
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="closeBtn" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="closeBtn" Property="Margin" Value="3.3"/>
+                            <Setter TargetName="closeBtn" Property="Style" Value="{StaticResource closeTab}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="ListBox" x:Key="MyListbox" >
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Padding" Value="0"/>
+        <!--<Setter Property="ScrollViewer.Style" >
+            <Setter.Value>
+                <Style TargetType="ScrollViewer" BasedOn="{StaticResource MyScrollViewer}"/>
+            </Setter.Value>
+        </Setter>-->
+        <Style.Resources>
+            <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource MyListItem}"/>
+            <Style TargetType="ScrollViewer" BasedOn="{StaticResource MyScrollViewer}"/>
+        </Style.Resources>
+    </Style>
+</ResourceDictionary>

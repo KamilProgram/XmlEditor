@@ -1,0 +1,44 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:XmlEditor.Views.Resources">
+
+    <SolidColorBrush x:Key="DarkBrush1" Color="#21242B"/>
+    <Color x:Key="DarkColor1">#21242B</Color>
+
+    <SolidColorBrush x:Key="DarkBrush2" Color="#282C34"/>
+    <Color x:Key="DarkColor2">#282C34</Color>
+
+    <SolidColorBrush x:Key="DarkBrush3" Color="#2D313A"/><!--2D313A-->
+    <Color x:Key="DarkColor3">#2D313A</Color>
+    
+    <SolidColorBrush x:Key="DarkBrush4" Color="#444C59"/>
+    <Color x:Key="DarkColor4">#444C59</Color>
+
+    <SolidColorBrush x:Key="DarkBrush5" Color="#515A6A"/>
+    <Color x:Key="DarkColor5">#515A6A</Color>
+
+    <SolidColorBrush x:Key="DarkBrush6" Color="#6B7380"/>
+    <Color x:Key="DarkColor6">#6B7380</Color>
+
+    <SolidColorBrush x:Key="DarkBrush7" Color="#363A45"/>
+    <Color x:Key="DarkColor7">#363A45</Color>
+    
+    <SolidColorBrush x:Key="LightBrush1" Color="#9BA1AD"/>
+    <Color x:Key="LightColor1">#9BA1AD</Color>
+
+    <SolidColorBrush x:Key="LightBrush2" Color="#C4C7CE"/>
+    <Color x:Key="LightColor2">#C4C7CE</Color>
+    
+    <SolidColorBrush x:Key="LightBrush3" Color="#EDEDED"/>
+    <Color x:Key="LightColor3">#EDEDED</Color>
+
+    <SolidColorBrush x:Key="LightBrush4" Color="#C7CBD6"/>
+    <Color x:Key="LightColor4">#C7CBD6</Color>
+    
+    <SolidColorBrush x:Key="LightBrush5" Color="#fff"/> <!--White-->
+    <Color x:Key="LightColor5">#fff</Color>
+
+    <SolidColorBrush x:Key="LightBrush6" Color="#ABB0BA"/>
+    <Color x:Key="LightColor6">#ABB0BA</Color>
+
+</ResourceDictionary>

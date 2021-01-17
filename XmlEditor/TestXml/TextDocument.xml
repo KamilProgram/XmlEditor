@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dmodule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://www.purl.org/dc/elements/1.1/" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:noNamespaceSchemaLocation=".\Required\ASD\S1000D Iss 2.3\xml_schema_flat/descript.xsd">
+  <idstatus>
+    <dmaddres>
+      <dmtitle>
+        <techname>Text document</techname>
+      </dmtitle>
+    </dmaddres>
+  </idstatus>
+  <content>
+    <descript>
+      <para>Lorem ipsum dolor sit ametconsectetur adipisicing elit. Quia odit, aliquid quae excepturi reiciendis tenetur recusandae distinctio repudiandae placeat laudantium nihil doloribus natus ex, dolore ducimus alias cum consequatur delectus!</para>
+      <para>Lorem ipsum dolor sit ametconsectetur adipisicing elit. Quia odit, aliquid quae excepturi reiciendis tenetur recusandae distinctio repudiandae placeat laudantium nihil doloribus natus ex, dolore ducimus alias cum consequatur delectus!</para>
+      <para/>
+    </descript>
+  </content>
+</dmodule>

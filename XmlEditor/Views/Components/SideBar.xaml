@@ -1,0 +1,149 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:XmlEditor.Views.Components"
+                    xmlns:dd="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop"
+                    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity">
+
+    <Style x:Key="Delimer" TargetType="Border">
+        <Setter Property="Padding" Value="4,0,4,0"/>
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Background" Value="{StaticResource DarkBrush1}"/>
+        <Style.Resources>
+            <Style TargetType="ToggleButton" BasedOn="{StaticResource Colapse90Btn}"/>
+            <Style TargetType="TextBlock">
+                <Setter Property="Margin" Value="2,5"/>
+                <Setter Property="FontSize" Value="11"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="FontFamily" Value="Tahoma"/>
+                <Setter Property="Foreground" Value="{StaticResource LightBrush2}"/>
+            </Style>
+
+            <Style TargetType="Button" BasedOn="{StaticResource CleanBtn}">
+                <Setter Property="Foreground" Value="{StaticResource LightBrush2}"/>
+                <Setter Property="Height" Value="17"/>
+                <Setter Property="Margin" Value="1"/>
+            </Style>
+        </Style.Resources>
+    </Style>
+
+    <Grid x:Key="Workspace"  Margin="0,0,-4,0" Background="{StaticResource DarkBrush3}">
+        <Grid.RowDefinitions>
+            <RowDefinition Name="Lable" Height="auto"/>
+            <RowDefinition Name="LableList" Height="auto"/>
+            <RowDefinition Name="List">
+                <RowDefinition.Style>
+                    <Style TargetType="{x:Type RowDefinition}">
+                        <Setter Property="Height" Value="200"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ListVisible}" Value="False">
+                                <Setter Property="Height" Value="auto"/>
+                                <Setter Property="MaxHeight" Value="0"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </RowDefinition.Style>
+
+            </RowDefinition>
+            <RowDefinition Name="LableTree" Height="auto"/>
+            <RowDefinition Name="Tree" Height="auto"/>
+            <RowDefinition>
+                <RowDefinition.Style>
+                    <Style TargetType="{x:Type RowDefinition}">
+                        <Setter Property="Height" Value="*"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding TreeVisible}" Value="False">
+                                <Setter Property="Height" Value="0"/>
+                                <Setter Property="Height" Value="0"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </RowDefinition.Style>
+            </RowDefinition>
+        </Grid.RowDefinitions>
+
+        
+        
+        
+        <Border Grid.Row="0" Height="33" Padding="4,0,0,0">
+            <TextBlock VerticalAlignment="Center" Foreground="{StaticResource LightBrush5}" FontSize="11">ПРОВОДНИК</TextBlock>
+        </Border>
+
+        <Border Grid.Row="1" DockPanel.Dock="Top" Style="{StaticResource Delimer}">
+            <Grid>
+                <ToggleButton x:Name="ListCollapse" IsChecked="{Binding ListVisible}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock  Text="ОТКРЫТЫЕ ФАЙЛЫ"/>
+                    </StackPanel>
+                </ToggleButton>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Command="{Binding CloseAllItemsCommand}">
+                        <ContentControl Style="{StaticResource closeAll}"/>
+                    </Button>
+                    <Button Command="{Binding NewFileCommand}">
+                        <ContentControl Style="{StaticResource addFile}"/>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+        <!-- dd:DragDrop.DropHandler="{Binding}"-->
+        <ListBox Grid.Row="2" x:Name="MyListBox"
+                 dd:DragDrop.IsDragSource="True"
+                 dd:DragDrop.IsDropTarget="True"        
+                 ItemsSource="{Binding Items}"
+                 
+                 SelectedItem="{Binding SelectedItem}" SelectedIndex="{Binding SelectedItemIndex}" 
+                 Style="{StaticResource MyListbox}">
+
+            <ListBox.InputBindings>
+                <KeyBinding  Key="F2" Command="{Binding RenameCommand}" />
+            </ListBox.InputBindings>
+            <ListBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Переименовать" Command="{Binding RenameCommand}"/>
+                    <MenuItem Header="Копировать имя"  Command="{Binding CopyNameCommand}"/>
+                    <MenuItem Header="Копировать путь"  Command="{Binding CopyPathCommand}"/>
+                </ContextMenu>
+            </ListBox.ContextMenu>
+            <!--
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="FocusableChanged">
+                    <i:InvokeCommandAction
+                                                Command="{Binding RenameStop}"
+                                                CommandParameter="{Binding}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>-->
+            
+        </ListBox>
+        
+        
+        <GridSplitter Grid.Row="3" ShowsPreview="False" 
+                          VerticalAlignment="Center" HorizontalAlignment="Stretch"
+                          Height="3px" Background="Transparent" Margin="0,-3,0,0"/>
+
+        <Border Grid.Row="4" DockPanel.Dock="Top" Style="{StaticResource Delimer}">
+            <Grid>
+                <ToggleButton x:Name="TreeCollapse" IsChecked="{Binding TreeVisible}">
+                    <TextBlock Text="РАБОЧАЯ ДИРЕКТОРИЯ"/>
+                </ToggleButton>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Command="{Binding OpenFolderCommand}" Padding="0,1,1,3">
+                        <ContentControl Style="{StaticResource openExplorer}" /> 
+                    </Button>
+                    <Button Command="{Binding NewFolderCommand}">
+                        <ContentControl Style="{StaticResource newExplorer}" />
+                    </Button>
+
+                    <Button Command="{Binding UpdateFolderCommand}">
+                        <ContentControl Style="{StaticResource update}" />
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+        
+        <TreeView Grid.Row="5" Name="treeView" ItemsSource="{Binding WorkFolder}" Style="{StaticResource MyTreeView}"/>
+        
+    </Grid>
+
+
+</ResourceDictionary>

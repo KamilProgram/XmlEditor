@@ -1,0 +1,442 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:texteditor="clr-namespace:XmlEditor.Models.DataType.AvalonEditor"
+                    xmlns:avalonedit="http://icsharpcode.net/sharpdevelop/avalonedit"
+                    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+                    x:Class="XmlEditor.Views.Components.TextPanel"
+                    x:ClassModifier="public">
+
+    <Grid x:Key="TextEditor">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="26"/>
+            <RowDefinition x:Name="TagsRow" Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <ContentControl Grid.Row="0" Content="{Binding TextEditor}">
+            <ContentControl.Resources>
+                <Style TargetType="{x:Type avalonedit:TextArea}">
+                    <Setter Property="FontSize" Value="12pt"/>
+                    <Setter Property="FontFamily" Value="Consolas"/>
+                </Style>
+                <Style TargetType="{x:Type texteditor:MyAvalonEditor}">
+                    <Setter Property="Padding" Value="15,0,0,0"/>
+                    <Setter Property="ScrollViewer.BorderThickness" Value="0"/>
+                    <Setter Property="ContextMenu">
+                        <Setter.Value>
+                            <ContextMenu>
+                                <MenuItem Command="Undo" />
+                                <MenuItem Command="Redo" />
+                                <Separator/>
+                                <MenuItem Command="Cut" />
+                                <MenuItem Command="Copy" />
+                                <MenuItem Command="Paste" />
+                            </ContextMenu>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+                <Style TargetType="ScrollBar" BasedOn="{StaticResource MyScroll}">
+                    <Setter Property="MinWidth" Value="12"/>
+                    <Setter Property="Width" Value="12"/>
+                </Style>
+            </ContentControl.Resources>
+        </ContentControl>
+
+
+        <Grid Grid.Row="1" Margin="4,0,4,0" >
+            <StackPanel Orientation="Horizontal" Background="{StaticResource DarkBrush1}" VerticalAlignment="Center">
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type Label}">
+                        <Setter Property="Foreground" Value="{StaticResource LightBrush5}"/>
+                        <Setter Property="FontFamily" Value="Microsoft Sans Serift"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        <Setter Property="Padding" Value="0,0,3,0"/>
+                    </Style>
+
+                    <Style TargetType="{x:Type TextBox}">
+                        <Setter Property="Foreground" Value="{StaticResource LightBrush5}"/>
+                        <Setter Property="Width" Value="36"/>
+                        <Setter Property="VerticalAlignment" Value="Bottom"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="FontFamily" Value="Microsoft Sans Serift"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="Margin" Value="0"/>
+                        <Setter Property="CaretBrush" Value="{StaticResource LightBrush5}"/>
+                    </Style>
+                </StackPanel.Resources>
+
+                <Label Content="Строка"/>
+
+                <TextBox x:Name="textLine"
+                                 Text="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.Line, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <TextBox.InputBindings>
+                        <KeyBinding  Key="Enter" 
+                                             Command="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.SetPosition}"/>
+                    </TextBox.InputBindings>
+                </TextBox>
+
+                <Label Content="Столбец"/>
+                <TextBox x:Name="textCol" 
+                                 Text="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.Col, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <TextBox.InputBindings>
+                        <KeyBinding  Key="Enter"
+                                             Command="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.SetPosition}"/>
+                    </TextBox.InputBindings>
+                </TextBox>
+            </StackPanel>
+
+            <ToggleButton Name="ToggleTagBtn" Style="{StaticResource Colapse180Btn}"  HorizontalAlignment="Right" Height="13" IsChecked="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.TagVisible, Mode=TwoWay}">
+                <Grid>
+                    <ContentControl Style="{StaticResource expand}"/>
+                </Grid>
+            </ToggleButton>
+
+        </Grid>
+
+        <Grid Background="{StaticResource DarkBrush2}" Grid.Row="2" x:Name="TagsPanel">
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <!--<Setter Property="Height" Value="200"/>
+                    <Setter Property="Visibility" Value="Visible"/>-->
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.TagVisible}" Value="false">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Setter Property="Height" Value="0"/>
+                            
+                            <!--<DataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation  From="200"
+                                                          To="0" 
+                                                          Duration="0:0:0.15" 
+                                                          Storyboard.TargetProperty="MaxHeight" 
+                                                          AutoReverse="False"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.EnterActions>
+                            <DataTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation From="0" 
+                                                         To="200" 
+                                                         Duration="0:0:0.15" 
+                                                         Storyboard.TargetProperty="MaxHeight" 
+                                                         AutoReverse="False"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.ExitActions>-->
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+
+            <ScrollViewer HorizontalScrollBarVisibility="Auto"  VerticalScrollBarVisibility="Disabled"
+                                      CanContentScroll="True"  Style="{StaticResource BotScroll}" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
+                <WrapPanel Orientation="Vertical" Margin="5,25,5,25" Height="150">
+                    <WrapPanel Orientation="Vertical" >
+                        <!--
+                            &quot; - "
+                            &lt;   - <
+                            &gt;   - >
+                            &#x0a; - новая строка
+                            _cursorSelect_ - текст в тэге
+                            _cursor_ - позиция курсора
+                            -->
+                        <Button Style="{StaticResource TagBtn}" Content="para"          ToolTip="Параграф"  Command="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.SetText}" CommandParameter="&lt;para&gt;_cursorSelect_&lt;/para&gt;"/>
+                        <Button Style="{StaticResource TagBtn}" Content="&lt;para&gt;"  ToolTip="Параграф (открывающий тэг)" Command="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.SetText}" CommandParameter="&lt;para&gt;_cursor_"/>
+                        <Button Style="{StaticResource TagBtn}" Content="&lt;/para&gt;" ToolTip="Параграф (закрывающий тэг)" Command="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.SetText}" CommandParameter="_cursor_&lt;/para&gt;"/>
+                        <Button Style="{StaticResource TagBtn}" Content="emphasis"      ToolTip="Жирный шрифт" Command="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.SetText}" CommandParameter="&lt;emphasis emph=\&quot;em01\&quot;&gt;_cursorSelect_&lt;/emphasis&gt;"/>
+
+                        <Button Style="{StaticResource TagBtn}" Content="seqlist абв)"  ToolTip="Буквенный список" Command="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.SetText}" CommandParameter="&lt;seqlist numPrefix=&quot;абв)&quot;&gt;&#x0a;&lt;item&gt; &lt;/item&gt;&#x0a;&lt;item&gt; &lt;/item&gt;&#x0a;&lt;item&gt; &lt;/item&gt;&#x0a;&lt;/seqlist&gt;"/>
+                        <Button Style="{StaticResource TagBtn}" Content="seqlist 1)"    ToolTip="Нумерованый список" Command="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.SetText}" CommandParameter="&lt;seqlist numPrefix=&quot;1)&quot;&gt;&#x0a;&lt;item&gt; &lt;/item&gt;&#x0a;&lt;item&gt; &lt;/item&gt;&#x0a;&lt;item&gt; &lt;/item&gt;&#x0a;&lt;/seqlist&gt;"/>
+                        <Button Style="{StaticResource TagBtn}" Content="randlist -"    ToolTip="Список" Command="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.SetText}" CommandParameter="&lt;randlist&gt;&#x0a;&lt;item&gt;&lt;/item&gt;&#x0a;&lt;item&gt;&lt;/item&gt;&#x0a;&lt;item&gt;&lt;/item&gt;&#x0a;&lt;/randlist&gt;"/>
+                        <Button Style="{StaticResource TagBtn}" Content="caution"       ToolTip="Внимание" Command="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.SetText}" CommandParameter="&lt;caution&gt;&#x0a;&lt;para&gt;Оленей с рук не кормить!&lt;/para&gt;&#x0a;&lt;/caution&gt;"/>
+
+                        <Button Style="{StaticResource TagBtn}" Content="subscrpt"   ToolTip="Нижний индекс" Command="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.SetText}" CommandParameter="&lt;subscrpt&gt;_cursorSelect_&lt;/subscrpt&gt;"/>
+                        <Button Style="{StaticResource TagBtn}" Content="supscrpt"   ToolTip="Верхний индекс" Command="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.SetText}" CommandParameter="&lt;supscrpt&gt;_cursorSelect_&lt;/supscrpt&gt;"/>
+                        <Button Style="{StaticResource TagBtn}" Content="item"       ToolTip="Пункт списка" Command="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.SetText}" CommandParameter="&lt;item&gt;_cursorSelect_&lt;/item&gt;"/>
+                        <Button Style="{StaticResource TagBtn}" Content="«selected»" ToolTip="Ковычки" Command="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.SetText}" CommandParameter="«_cursorSelect_»"/>
+                    </WrapPanel>
+
+                    <WrapPanel Orientation="Vertical" Height="100">
+                        <Button Style="{StaticResource TagBtn}" Width="96"  HorizontalContentAlignment="Left" ToolTip="Выравнивание в таблице к левому краю" Command="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.SetText}" CommandParameter="align=&quot;left&quot;">align="left"</Button>
+                        <Button Style="{StaticResource TagBtn}" Width="96" Height="43" VerticalContentAlignment="Top"    ToolTip="Выравнивание сверху" Command="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.SetText}" CommandParameter="valign=&quot;top&quot;">valign="top"</Button>
+                        <Button Style="{StaticResource TagBtn}" Width="96" ToolTip="Выравнивание в таблице посередине" Command="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.SetText}"   CommandParameter="align=&quot;center&quot;">align="center"</Button>
+                        <Button Style="{StaticResource TagBtn}" Width="96" Height="43" ToolTip="Выравнивание посередине"  Command="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.SetText}" CommandParameter="valign=&quot;middle&quot;">valign="middle"</Button>
+                        <Button Style="{StaticResource TagBtn}" Width="96" ToolTip="Выравнивание в таблице к правому краю" HorizontalContentAlignment="Right"  Command="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.SetText}" CommandParameter="align=&quot;right&quot;">align="right"</Button>
+                        <Button Style="{StaticResource TagBtn}" Width="96" Height="43" ToolTip="Выравниванять снизу"  VerticalContentAlignment="Bottom" Command="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.SetText}" CommandParameter="valign=&quot;bottom&quot;">valign="bottom"</Button>
+                    </WrapPanel>
+
+                    <WrapPanel Orientation="Vertical" Height="110">
+                        <Button Style="{StaticResource TagBtn}" ToolTip="Толщина вертикальной линии" Command="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.SetText}" CommandParameter="colsep=&quot;1&quot;">colsep="1"</Button>
+                        <Button Style="{StaticResource TagBtn}" ToolTip="Толщина вертикальной линии" Command="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.SetText}" CommandParameter="colsep=&quot;0&quot;">colsep="0"</Button>
+                        <Button Style="{StaticResource TagBtn}" ToolTip="Толщина горизонтальной линии" Command="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.SetText}" CommandParameter="rowsep=&quot;0&quot;">rowsep="0"</Button>
+                        <Button Style="{StaticResource TagBtn}" ToolTip="Толщина горизонтальной линии" Command="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.SetText}" CommandParameter="rowsep=&quot;1&quot;">rowsep="1"</Button>
+                        <Button Style="{StaticResource TagBtn}" ToolTip="Вставка картинки" Command="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.SetText}" CommandParameter="&lt;figure id=&quot;fig-1&quot;&gt;&#x0a;  &lt;title&gt;Название рисунка&lt;/title&gt;&#x0a;  &lt;graphic boardno=&quot;666.svg&quot;/&gt;&#x0a;&lt;/figure&gt;">figure</Button>
+                        <Button Style="{StaticResource TagBtn}" ToolTip="Вставка символа" Command="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.SetText}" CommandParameter="&lt;symbol boardno=&quot;666.svg&quot; reproscl=&quot;1&quot;&gt;_cursorSelect_&lt;/symbol&gt;">symbol</Button>
+                        <Button Style="{StaticResource TagBtn}" ToolTip="Ссылка на *pdf" Command="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.SetText}" CommandParameter="&lt;refdm href=&quot;666.pdf&quot; title=&quot;_cursorSelect_&quot;/&gt;">refdm pdf</Button>
+                        <Button Style="{StaticResource TagBtn}" ToolTip="Ссылка на картинку" Command="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.SetText}" CommandParameter="(&lt;xref xidtype=&quot;figure&quot; xrefid=&quot;fig-1&quot;/&gt;)">xref figure</Button>
+                        <Button Style="{StaticResource TagBtn}" ToolTip="Ссылка на выноску" Command="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.SetText}" CommandParameter="&lt;xref xrefid=&quot;hotspot666&quot; xidtype=&quot;hotspot&quot;/&gt;">xref hotspot</Button>
+                        <Button Style="{StaticResource TagBtn}" ToolTip="Ссылка на *xml" Command="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.SetText}" CommandParameter="&lt;refdm href=&quot;666.xml&quot; title=&quot;_cursorSelect_&quot;/&gt;">reddm xml</Button>
+                        <Button Style="{StaticResource TagBtn}" ToolTip="Вставка таблицы" Command="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.SetText}" CommandParameter="&lt;table frame=&quot;all&quot; id=&quot;tab1&quot;&gt;&#x0a;&lt;title&gt;Название&lt;/title&gt;&#x0a;&lt;tgroup cols=&quot;3&quot;&gt;&#x0a;&lt;colspec colnum=&quot;1&quot; colname=&quot;1&quot;  colsep=&quot;1&quot;/&gt;&#x0a;&lt;colspec colnum=&quot;2&quot; colname=&quot;2&quot;  colsep=&quot;1&quot;/&gt;&#x0a;&lt;colspec colnum=&quot;3&quot; colname=&quot;3&quot;  colsep=&quot;0&quot;/&gt;&#x0a; &lt;thead&gt;&#x0a;&lt;row&gt;&#x0a;&lt;entry&gt;1&lt;/entry&gt;&#x0a;&lt;entry&gt;2&lt;/entry&gt;&#x0a;&lt;entry&gt;3&lt;/entry&gt;&#x0a;&lt;/row&gt;&#x0a;&lt;/thead&gt;&#x0a;&lt;tbody&gt;&#x0a;&lt;row&gt;&#x0a;&lt;entry&gt;111&lt;/entry&gt;&#x0a;&lt;entry&gt;112&lt;/entry&gt;&#x0a;&lt;entry&gt;114&lt;/entry&gt;&#x0a;&lt;/row&gt;&#x0a;&lt;row rowsep=&quot;0&quot;&gt;&#x0a;&lt;entry&gt;111&lt;/entry&gt;&#x0a;&lt;entry&gt;112&lt;/entry&gt;&#x0a;&lt;entry&gt;114&lt;/entry&gt;&#x0a;&lt;/row&gt;&#x0a;&lt;/tbody&gt;&#x0a;&lt;/tgroup&gt;&#x0a;&lt;/table&gt;">table</Button>
+                        <Button Style="{StaticResource TagBtn}" ToolTip="Ссылка на таблицу" Command="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.SetText}" CommandParameter="&lt;xref xrefid=&quot;tab1&quot; xidtype=&quot;table&quot; /&gt;">xrefid table</Button>
+                    </WrapPanel>
+
+                    <WrapPanel>
+                        <Button Style="{StaticResource TagBtn}" ToolTip="Примечание" Command="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.SetText}" CommandParameter="&lt;note&gt;_cursorSelect_&lt;/note&gt;">note</Button>
+                        <Button Style="{StaticResource TagBtn}" ToolTip="Запрещается" Command="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.SetText}" CommandParameter="&lt;warning&gt;_cursorSelect_&lt;/warning&gt;">warning</Button>
+                        <Button Style="{StaticResource TagBtn}" ToolTip="Видимый пробел" Command="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.SetText}" CommandParameter="&lt;para&gt;alt 255 &lt;/para&gt;">&lt;para&gt;alt 255 &lt;/para&gt;</Button>
+                    </WrapPanel>
+                </WrapPanel>
+            </ScrollViewer>
+        </Grid>
+
+    </Grid>
+
+    <Grid x:Key="RenderPanel">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="26"/>
+            <RowDefinition x:Name="ErrorList" Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Frame Panel.ZIndex="1" Grid.Column="0" NavigationUIVisibility="Hidden"  Background="{StaticResource DarkBrush1}"
+                   Content="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.CurrentPage}" >
+<!--
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <i:InvokeCommandAction               
+                             Command="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.CurrentPageTab}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>-->
+        </Frame>
+
+
+
+        <Grid Grid.Row="1" Background="#0076B7"  >
+            <StackPanel Orientation="Horizontal"  Margin="4,0,4,0"  VerticalAlignment="Center">
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type Label}">
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="FontFamily" Value="Microsoft Sans Serift"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        <Setter Property="Padding" Value="0,0,3,0"/>
+                    </Style>
+
+                    <Style TargetType="{x:Type TextBox}">
+                        <Setter Property="Foreground" Value="{StaticResource LightBrush5}"/>
+                        <Setter Property="Width" Value="36"/>
+                        <Setter Property="VerticalAlignment" Value="Bottom"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="FontFamily" Value="Microsoft Sans Serift"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="Margin" Value="0"/>
+                        <Setter Property="CaretBrush" Value="{StaticResource LightBrush5}"/>
+                    </Style>
+                </StackPanel.Resources>
+
+                <Label Content="Ошибок"/>
+
+                <Label x:Name="Error" Width="36"
+                                 Content="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.ErrorCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+
+                </Label>
+
+                <Label Content="Предупреждений"/>
+                <Label x:Name="Warnings" Width="36"
+                                 Content="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.WarningsCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+
+                </Label>
+            </StackPanel>
+
+            <ToggleButton Name="ToggleErrorBtn" Style="{StaticResource Colapse180Btn}"  HorizontalAlignment="Right" Height="13" IsChecked="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.ErrorVisible, Mode=TwoWay}">
+                <Grid>
+                    <ContentControl Style="{StaticResource expand}"/>
+                </Grid>
+            </ToggleButton>
+
+        </Grid>
+        <Grid Background="{StaticResource DarkBrush2}" Grid.Row="2" x:Name="ErrorPanel">
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.ErrorVisible}" Value="false">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Setter Property="Height" Value="0"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            <Grid Height="200">
+            </Grid>
+        </Grid>
+
+    </Grid>
+    
+    <DataTemplate x:Key="MyTabContentTemplate" x:Shared="False">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition  Name="TextPanelSpliter">
+                   <ColumnDefinition.Style>
+                        <Style TargetType="{x:Type ColumnDefinition}">
+                            <Style.Setters>
+                                <Setter Property="Width" Value="auto"/>
+                            </Style.Setters>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.RenderVisible}" Value="False">
+                                    <DataTrigger.Setters>
+                                        <Setter Property="Width" Value="0"/>
+                                        <Setter Property="MaxWidth" Value="0"/>
+                                    </DataTrigger.Setters>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ColumnDefinition.Style>
+                </ColumnDefinition>
+
+                <ColumnDefinition Name="RenderPanel">
+                    <ColumnDefinition.Style>
+                        <Style TargetType="{x:Type ColumnDefinition}">
+                            <Style.Setters>
+                                <Setter Property="Width" Value="*"/>
+                                <Setter Property="MinWidth" Value="200"/>
+                            </Style.Setters>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.RenderVisible}" Value="False">
+                                    <DataTrigger.Setters>
+                                        <Setter Property="MinWidth" Value="0"/>
+                                        <Setter Property="Width" Value="0"/>
+                                        <Setter Property="MaxWidth" Value="0"/>
+                                    </DataTrigger.Setters>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ColumnDefinition.Style>
+                   
+                </ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+
+            <ContentControl Grid.Column="0" Content="{StaticResource TextEditor}" />
+            
+            <GridSplitter Grid.Column="1" Width="4" HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="-4,0,0,0" Background="Transparent"/>
+
+            <ContentControl Grid.Column="2" Content="{StaticResource RenderPanel}" />
+
+        </Grid>
+
+
+
+    </DataTemplate>
+    
+    <Style TargetType="ColumnDefinition" x:Key="ColTextPanelSpliter">
+      
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.RenderVisible}" Value="False">
+                <DataTrigger.Setters>
+                    <Setter Property="Width" Value="0"/>
+                    <Setter Property="MaxWidth" Value="0"/>
+                </DataTrigger.Setters>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="{x:Type ColumnDefinition}" x:Key="ColRenderPanel">
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.RenderVisible}" Value="False">
+                <DataTrigger.Setters>
+                    <Setter Property="MinWidth" Value="0"/>
+                    <Setter Property="Width" Value="0"/>
+                    <Setter Property="MaxWidth" Value="0"/>
+                </DataTrigger.Setters>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    
+    <!--                    Style="{StaticResource MyTabControl}" Visibility="{Binding StartPanelVisible, Converter={StaticResource btv}}"-->
+
+
+
+    <TabControl  x:Key="TextPanel"  
+
+                                        
+                                       
+ 
+                    ItemsSource="{Binding Items}"
+                     
+                    SelectedItem="{Binding SelectedItem}" 
+                    SelectedIndex="{Binding SelectedItemIndex}"
+                    Style="{StaticResource MyTabControl}" 
+                    >
+            
+            <TabControl.Resources>
+                <Style TargetType="{x:Type TabItem}" BasedOn="{StaticResource MyTabStyle}">
+                   <!-- 
+                    
+                    
+                     dd:DragDrop.DropTargetAdornerBrush="Coral"
+                                         dd:DragDrop.IsDragSource="True"
+                                         dd:DragDrop.IsDropTarget="True"
+                    
+                    
+                    
+                    <Setter Property="ContentTemplate" Value="{StaticResource MyTabContentTemplate}"/>
+                    
+                      dd:DragDrop.IsDragSource="True"
+                    dd:DragDrop.IsDropTarget="True"    
+                    DropHandler="{Binding}"-->
+                <Setter Property="ContentTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <Grid    >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition  Name="TextPanelSpliter">
+                                        <ColumnDefinition.Style>
+                                            <Style TargetType="{x:Type ColumnDefinition}" BasedOn="{StaticResource ResourceKey=ColTextPanelSpliter}">
+                                                <Style.Setters>
+                                                    <Setter Property="Width" Value="auto"/>
+                                                </Style.Setters>
+                                            </Style>
+                                        </ColumnDefinition.Style>
+                                    </ColumnDefinition>
+
+                                    <ColumnDefinition Name="RenderPanel">
+                                        <ColumnDefinition.Style>
+                                            <Style TargetType="{x:Type ColumnDefinition}" BasedOn="{StaticResource ResourceKey=ColRenderPanel}">
+                                                <Style.Setters>
+                                                    <Setter Property="Width" Value="*"/>
+                                                    <Setter Property="MinWidth" Value="200"/>
+                                                </Style.Setters>
+                                            </Style>
+                                        </ColumnDefinition.Style>
+
+                                    </ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+
+                                <ContentControl Grid.Column="0" Content="{StaticResource TextEditor}" />
+
+                                <GridSplitter Grid.Column="1" Width="4" HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="-4,0,0,0" Background="Transparent"/>
+
+                                <ContentControl Grid.Column="2" Content="{StaticResource RenderPanel}" 
+                                              
+ />
+
+                            </Grid>
+
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+                </Style>
+            </TabControl.Resources>
+            
+           <!-- <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding TransformTabCommand}" CommandParameter="SelectedItem"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>-->
+        </TabControl>
+
+</ResourceDictionary>

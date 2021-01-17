@@ -1,0 +1,672 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:XmlEditor.Views.Resources">
+
+
+    <Style x:Key="openFile" TargetType="{x:Type ContentControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContentControl">
+                    <Image>
+                        <Image.Source>
+                            <DrawingImage>
+                                <DrawingImage.Drawing>
+                                    
+                                            <DrawingGroup Opacity="1">
+                                                <DrawingGroup.Children>
+                                                    <GeometryDrawing x:Name="GeometryName" Brush="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}" Pen="{x:Null}">
+                                                        <GeometryDrawing.Geometry>
+                                                            <PathGeometry FillRule="Nonzero" Figures="M400,120L240,120 200,80 80,80C57.96875,80,40,97.96875,40,120L40,360C40,382.03125,57.96875,400,80,400L400,400C422.03125,400,440,382.03125,440,360L440,160C440,137.96875,422.03125,120,400,120z M400,360L80,360 80,160 400,160z" />
+                                                        </GeometryDrawing.Geometry>
+                                                    </GeometryDrawing>
+                                                </DrawingGroup.Children>
+                                            </DrawingGroup>
+                                     
+                                </DrawingImage.Drawing>
+                            </DrawingImage>
+                        </Image.Source>
+                    </Image>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="update" TargetType="{x:Type ContentControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContentControl">
+                    <Image>
+                        <Image.Source>
+                            <DrawingImage>
+                                <DrawingImage.Drawing>
+                                    
+                                                    <DrawingGroup Opacity="1">
+                                                        <DrawingGroup.Children>
+                                                            <GeometryDrawing x:Name="GeometryName" Brush="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}" Pen="{x:Null}">
+                                                                <GeometryDrawing.Geometry>
+                                                                    <PathGeometry FillRule="Nonzero" Figures="M48,8C25.9375,8 8,25.9375 8,48 8,70.0625 25.9375,88 48,88 70.0625,88 88,70.0625 88,48L80,48C80,65.640625 65.640625,80 48,80 30.359375,80 16,65.640625 16,48 16,30.359375 30.359375,16 48,16 56.828125,16 64.8125,19.609375 70.609375,25.40625L60,36 88,36 88,8 76.25,19.75C69,12.5,59.03125,8,48,8z" />
+                                                                </GeometryDrawing.Geometry>
+                                                                <!--<GeometryDrawing.Geometry>
+                                                                    <PathGeometry FillRule="Nonzero" Figures="M240,60C185.234375,60,136.328125,84.609375,103.28125,123.28125L60,80 60,200 180,200 131.875,151.875C157.5,120.3125 196.328125,100 240,100 317.1875,100 380,162.8125 380,240L420,240C420,140.78125,339.296875,60,240,60z M60,240C60,339.296875 140.703125,420 240,420 294.765625,420 343.671875,395.390625 376.640625,356.640625L420,400 420,280 300,280 348.125,328.125C322.5,359.6875 283.671875,380 240,380 162.8125,380 100,317.1875 100,240z" />
+                                                                </GeometryDrawing.Geometry>-->
+                                                            </GeometryDrawing>
+                                                        </DrawingGroup.Children>
+                                                    </DrawingGroup>
+                                                
+                                </DrawingImage.Drawing>
+                            </DrawingImage>
+                        </Image.Source>
+                    </Image>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="save" TargetType="{x:Type ContentControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContentControl">
+                    <Image>
+                        <Image.Source>
+                            <DrawingImage>
+                                <DrawingImage.Drawing>
+                                  
+                                                    <DrawingGroup Opacity="1">
+                                                        <DrawingGroup.Children>
+                                                            <GeometryDrawing x:Name="GeometryName" Brush="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}" Pen="{x:Null}">
+                                                                <GeometryDrawing.Geometry>
+                                                                    <PathGeometry FillRule="Nonzero" Figures="M340,60L100,60C77.8125,60,60,77.96875,60,100L60,380C60,402.03125,77.8125,420,100,420L380,420C402.03125,420,420,402.03125,420,380L420,140z M240,380C206.796875,380 180,353.203125 180,320 180,286.796875 206.796875,260 240,260 273.203125,260 300,286.796875 300,320 300,353.203125 273.203125,380 240,380z M300,180L100,180 100,100 300,100z" />
+                                                                </GeometryDrawing.Geometry>
+                                                            </GeometryDrawing>
+                                                        </DrawingGroup.Children>
+                                                    </DrawingGroup>
+                                               
+                                </DrawingImage.Drawing>
+                            </DrawingImage>
+                        </Image.Source>
+                    </Image>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style x:Key="saveAs" TargetType="{x:Type ContentControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContentControl">
+                    <Image>
+                        <Image.Source>
+                            <DrawingImage>
+                                <DrawingImage.Drawing>
+                                    
+                                                    <DrawingGroup Opacity="1">
+                                                        <DrawingGroup.Children>
+                                                            <GeometryDrawing x:Name="GeometryName" Brush="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}" Pen="{x:Null}">
+                                                                <GeometryDrawing.Geometry>
+                                                                    <PathGeometry FillRule="Nonzero" Figures="M100,60C77.8125,60,60,77.96875,60,100L60,380C60,402.03125,77.8125,420,100,420L323.4375,420 273.359375,369.921875C263.828125,376.25 252.34375,380 240,380 206.796875,380 180,353.203125 180,320 180,286.796875 206.796875,260 240,260L340,260C350.625,260,360.78125,264.21875,368.28125,271.71875L420,323.4375 420,140 340,60z M100,100L300,100 300,180 100,180z M300,300L300,340 402.890625,442.890625 442.890625,402.890625 340,300z M457.109375,417.109375L417.109375,457.109375 437.109375,477.109375C440.9375,480.9375,447.34375,480.9375,451.25,477.109375L477.109375,451.25C480.9375,447.265625,480.9375,440.9375,477.109375,437.109375z" />
+                                                                </GeometryDrawing.Geometry>
+                                                            </GeometryDrawing>
+                                                        </DrawingGroup.Children>
+                                                    </DrawingGroup>
+                                                
+                                </DrawingImage.Drawing>
+                            </DrawingImage>
+                        </Image.Source>
+                    </Image>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="copyPath" TargetType="{x:Type ContentControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContentControl">
+                    <Image>
+                        <Image.Source>
+                            <DrawingImage>
+                                <DrawingImage.Drawing>
+                                
+                                                    <DrawingGroup Opacity="1">
+                                                        <DrawingGroup.Children>
+                                                            <GeometryDrawing x:Name="GeometryName" Brush="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}" Pen="{x:Null}">
+                                                                <GeometryDrawing.Geometry>
+                                                                    <PathGeometry FillRule="Nonzero" Figures="M60,40L60,120 80,120 80,440 220,440 220,460 300,460 300,380 220,380 220,400 120,400 120,320 220,320 220,340 300,340 300,260 220,260 220,280 120,280 120,200 220,200 220,220 300,220 300,140 220,140 220,160 120,160 120,120 140,120 140,40z M340,160L340,200 380,200 380,400 340,400 400,460 460,400 420,400 420,160z" />
+                                                                </GeometryDrawing.Geometry>
+                                                            </GeometryDrawing>
+                                                        </DrawingGroup.Children>
+                                                    </DrawingGroup>
+                                              
+                                </DrawingImage.Drawing>
+                            </DrawingImage>
+                        </Image.Source>
+                    </Image>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="copyName" TargetType="{x:Type ContentControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContentControl">
+                    <Image>
+                        <Image.Source>
+                            <DrawingImage>
+                                <DrawingImage.Drawing>
+
+                                                    <DrawingGroup Opacity="1">
+                                                        <DrawingGroup.Children>
+                                                            <GeometryDrawing x:Name="GeometryName" Brush="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}" Pen="{x:Null}">
+                                                                <GeometryDrawing.Geometry>
+                                                                    <PathGeometry FillRule="Nonzero" Figures="M120,40L120,120 140,120 140,440 243.4375,440 283.4375,400 180,400 180,320 280,320 280,340 360,340 360,260 280,260 280,280 180,280 180,200 280,200 280,220 360,220 360,140 280,140 280,160 180,160 180,120 200,120 200,40z M444.140625,300C441.5625,300,438.984375,301.015625,437.109375,302.890625L417.109375,322.890625 457.109375,362.890625 477.109375,342.890625C480.9375,339.0625,480.9375,332.65625,477.109375,328.75L451.25,302.890625C449.21875,301.015625,446.71875,300,444.140625,300z M402.890625,337.109375L300,440 300,480 340,480 442.890625,377.109375z" />
+                                                                </GeometryDrawing.Geometry>
+                                                            </GeometryDrawing>
+                                                        </DrawingGroup.Children>
+                                                    </DrawingGroup>
+                                               
+                                </DrawingImage.Drawing>
+                            </DrawingImage>
+                        </Image.Source>
+                    </Image>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="updateFile" TargetType="{x:Type ContentControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContentControl">
+                    <Image>
+                        <Image.Source>
+                            <DrawingImage>
+                                <DrawingImage.Drawing>
+                                    
+                                                    <DrawingGroup Opacity="1">
+                                                        <DrawingGroup.Children>
+                                                            <GeometryDrawing x:Name="GeometryName" Brush="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}" Pen="{x:Null}">
+                                                                <GeometryDrawing.Geometry>
+                                                                    <PathGeometry FillRule="Nonzero" Figures="M120,40C97.96875,40,80,57.96875,80,80L80,400C80,422.03125,97.96875,440,120,440L237.421875,440C233.984375,433.59375,231.09375,426.875,228.671875,420L228.75,420C228.359375,418.984375 228.046875,417.96875 227.734375,416.875 226.328125,412.578125 225.078125,408.203125 224.0625,403.75 221.484375,392.890625 220,381.640625 220,370 220,287.1875 287.1875,220 370,220 380.3125,220 390.3125,221.015625 400,223.046875L400,160 280,40z M260,69.0625L370,180 260,180z M370,260C309.375,260 260,309.375 260,370 260,394.84375 268.203125,418.125 282.890625,437.109375L260,460 340,460 340,380 311.875,408.125C304.453125,396.953125 300,383.984375 300,370 300,331.40625 331.40625,300 370,300 408.59375,300 440,331.40625 440,370 440,405.15625 413.828125,434.609375 380,439.453125L380,480C436.015625,474.921875 480,427.265625 480,370 480,309.375 430.625,260 370,260z" />
+                                                                </GeometryDrawing.Geometry>
+                                                            </GeometryDrawing>
+                                                        </DrawingGroup.Children>
+                                                    </DrawingGroup>
+                                          
+                                </DrawingImage.Drawing>
+                            </DrawingImage>
+                        </Image.Source>
+                    </Image>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style x:Key="closeTab" TargetType="{x:Type ContentControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContentControl">
+                    <Image>
+                        <Image.Source>
+                            <DrawingImage>
+                                <DrawingImage.Drawing>
+                            
+                                                    <DrawingGroup Opacity="1">
+                                                        <DrawingGroup.Children>
+                                                            <GeometryDrawing x:Name="GeometryName" Brush="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}" Pen="{x:Null}">
+                                                                <GeometryDrawing.Geometry>
+                                                                    <PathGeometry FillRule="Nonzero" Figures="M150.050781,121.835938L121.835938,150.050781 220.425781,248.015625 121.835938,345.980469 150.050781,374.195313 248.636719,276.226563 347.222656,374.195313 375.125,345.980469 276.847656,248.015625 375.125,150.050781 347.222656,121.835938 248.636719,219.804688z" />
+                                                                </GeometryDrawing.Geometry>
+                                                            </GeometryDrawing>
+                                                        </DrawingGroup.Children>
+                                                    </DrawingGroup>
+                                                
+                                </DrawingImage.Drawing>
+                            </DrawingImage>
+                        </Image.Source>
+                    </Image>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="expand" TargetType="{x:Type ContentControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContentControl">
+                    <Image>
+                        <Image.Source>
+                            <DrawingImage>
+                                <DrawingImage.Drawing>
+                                   
+                                                    <DrawingGroup Opacity="1">
+                                                        <DrawingGroup.Children>
+                                                            <GeometryDrawing x:Name="GeometryName" Brush="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}" Pen="{x:Null}">
+                                                                <GeometryDrawing.Geometry>
+                                                                    <PathGeometry FillRule="Nonzero" Figures="M148.59375,190L118.59375,220 240,341.40625 361.40625,220 331.40625,190 240,281.40625z" />
+                                                                </GeometryDrawing.Geometry>
+                                                            </GeometryDrawing>
+                                                        </DrawingGroup.Children>
+                                                    </DrawingGroup>
+                                                
+                                </DrawingImage.Drawing>
+                            </DrawingImage>
+                        </Image.Source>
+                    </Image>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style x:Key="table" TargetType="{x:Type ContentControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContentControl">
+                    <Image>
+                        <Image.Source>
+                            <DrawingImage>
+                                <DrawingImage.Drawing>
+                                   
+                                                    <DrawingGroup Opacity="1">
+                                                        <DrawingGroup.Children>
+                                                            <GeometryDrawing x:Name="GeometryName" Brush="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}" Pen="{x:Null}">
+                                                                <GeometryDrawing.Geometry>
+                                                                    <PathGeometry FillRule="Nonzero" Figures="M80,40C58.125,40,40,58.125,40,80L40,400C40,421.875,58.125,440,80,440L400,440C421.875,440,440,421.875,440,400L440,80C440,58.125,421.875,40,400,40z M80,80L160,80 160,160 80,160z M200,80L280,80 280,160 200,160z M320,80L400,80 400,160 320,160z M100,100L100,140 140,140 140,100z M220,100L220,140 260,140 260,100z M340,100L340,140 380,140 380,100z M80,200L160,200 160,280 80,280z M200,200L280,200 280,280 200,280z M320,200L400,200 400,280 320,280z M100,220L100,260 140,260 140,220z M80,320L160,320 160,400 80,400z M200,320L280,320 280,400 200,400z M320,320L400,320 400,400 320,400z M100,340L100,380 140,380 140,340z" />
+                                                                </GeometryDrawing.Geometry>
+                                                                <!--<GeometryDrawing.Geometry>
+                                                                    <PathGeometry FillRule="Nonzero" Figures="M11.984375,1.9863281A1.0001,1.0001,0,0,0,11.839844,2L4,2A1.0001,1.0001,0,0,0,3,3L3,8.8320312A1.0001,1.0001,0,0,0,3,9.1582031L3,14.832031A1.0001,1.0001,0,0,0,3,15.158203L3,21A1.0001,1.0001,0,0,0,4,22L11.832031,22A1.0001,1.0001,0,0,0,12.158203,22L20,22A1.0001,1.0001,0,0,0,21,21L21,15.167969A1.0001,1.0001,0,0,0,21,14.841797L21,9.1679688A1.0001,1.0001,0,0,0,21,8.8417969L21,3A1.0001,1.0001,0,0,0,20,2L12.154297,2A1.0001,1.0001,0,0,0,11.984375,1.9863281z M5,4L11,4 11,8 5,8 5,4z M13,4L19,4 19,8 13,8 13,4z M5,10L11,10 11,14 5,14 5,10z M13,10L19,10 19,14 13,14 13,10z M5,16L11,16 11,20 5,20 5,16z M13,16L19,16 19,20 13,20 13,16z" />
+                                                                </GeometryDrawing.Geometry>-->
+                                                            </GeometryDrawing>
+                                                        </DrawingGroup.Children>
+                                                    </DrawingGroup>
+                                              
+                                </DrawingImage.Drawing>
+                            </DrawingImage>
+                        </Image.Source>
+                    </Image>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="page" TargetType="{x:Type ContentControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContentControl">
+                    <Image>
+                        <Image.Source>
+                            <DrawingImage>
+                                <DrawingImage.Drawing>
+                                   
+                                                    <DrawingGroup Opacity="1">
+                                                        <DrawingGroup.Children>
+                                                            <GeometryDrawing x:Name="GeometryName" Brush="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}" Pen="{x:Null}">
+                                                                <GeometryDrawing.Geometry>
+                                                                    <PathGeometry FillRule="Nonzero" Figures="M5,3C3.9069372,3,3,3.9069372,3,5L3,19C3,20.093063,3.9069372,21,5,21L19,21C20.093063,21,21,20.093063,21,19L21,5C21,3.9069372,20.093063,3,19,3L5,3z M5,8L19,8 19,19 5,19 5,8z M7,10L7,12 17,12 17,10 7,10z M7,13L7,18 11,18 11,13 7,13z M13,13L13,18 17,18 17,13 13,13z" />
+                                                                </GeometryDrawing.Geometry>
+                                                            </GeometryDrawing>
+                                                        </DrawingGroup.Children>
+                                                    </DrawingGroup>
+                                          
+                                </DrawingImage.Drawing>
+                            </DrawingImage>
+                        </Image.Source>
+                    </Image>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style x:Key="circle" TargetType="{x:Type ContentControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContentControl">
+                    <Image>
+                        <Image.Source>
+                            <DrawingImage>
+                                <DrawingImage.Drawing>
+                                 
+                                                    <DrawingGroup Opacity="1">
+                                                        <DrawingGroup.Children>
+                                                            <GeometryDrawing x:Name="GeometryName" Brush="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}" Pen="{x:Null}">
+                                                                <GeometryDrawing.Geometry>
+                                                                    <PathGeometry FillRule="Nonzero" Figures="M48,8C25.90625,8 8,25.90625 8,48 8,70.09375 25.90625,88 48,88 70.09375,88 88,70.09375 88,48 88,25.90625 70.09375,8 48,8z" />
+                                                                </GeometryDrawing.Geometry>
+                                                            </GeometryDrawing>
+                                                        </DrawingGroup.Children>
+                                                    </DrawingGroup>
+                                                
+                                </DrawingImage.Drawing>
+                            </DrawingImage>
+                        </Image.Source>
+                    </Image>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style x:Key="checkmark" TargetType="{x:Type ContentControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContentControl">
+                    <Image>
+                        <Image.Source>
+                            <DrawingImage>
+                                <DrawingImage.Drawing>
+                                   
+                                                    <DrawingGroup Opacity="1">
+                                                        <DrawingGroup.Children>
+                                                            <GeometryDrawing x:Name="GeometryName" Brush="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}" Pen="{x:Null}">
+                                                                <GeometryDrawing.Geometry>
+                                                                    <PathGeometry FillRule="Nonzero" Figures="M452.5,100.5L176,377 59.5,260.5 36.5,283.5 164.5,411.5 176,422.5 187.5,411.5 475.5,123.5z" />
+                                                                </GeometryDrawing.Geometry>
+                                                            </GeometryDrawing>
+                                                        </DrawingGroup.Children>
+                                                    </DrawingGroup>
+                                          
+                                </DrawingImage.Drawing>
+                            </DrawingImage>
+                        </Image.Source>
+                    </Image>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="explorer" TargetType="{x:Type ContentControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContentControl">
+                    <Image>
+                        <Image.Source>
+                            <DrawingImage>
+                                <DrawingImage.Drawing>
+                                    <DrawingGroup Opacity="1">
+                                        <DrawingGroup.Children>
+                                            <GeometryDrawing x:Name="GeometryName" Brush="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}" Pen="{x:Null}">
+                                                <GeometryDrawing.Geometry>
+                                                    <PathGeometry FillRule="Nonzero" Figures="M10.855469,1.972656C9.765625,1.972656,8.882813,2.855469,8.882813,3.949219L8.882813,19.738281C8.882813,20.828125,9.765625,21.710938,10.855469,21.710938L23.683594,21.710938C24.773438,21.710938,25.65625,20.828125,25.65625,19.738281L25.65625,8.386719C25.65625,8.125,25.554688,7.875,25.367188,7.691406L19.941406,2.261719C19.757813,2.078125,19.503906,1.972656,19.242188,1.972656z M18.75,3.855469L23.777344,8.882813 19.738281,8.882813C19.191406,8.882813,18.75,8.4375,18.75,7.894531z M5.921875,6.90625C4.832031,6.90625,3.949219,7.789063,3.949219,8.882813L3.949219,24.671875C3.949219,25.761719,4.832031,26.644531,5.921875,26.644531L18.75,26.644531C19.839844,26.644531,20.722656,25.761719,20.722656,24.671875L20.722656,23.683594 10.855469,23.683594C8.675781,23.683594,6.90625,21.914063,6.90625,19.738281L6.90625,6.90625z" />
+                                                </GeometryDrawing.Geometry>
+                                            </GeometryDrawing>
+                                        </DrawingGroup.Children>
+                                    </DrawingGroup>
+                                </DrawingImage.Drawing>
+                            </DrawingImage>
+                        </Image.Source>
+                    </Image>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="text" TargetType="{x:Type ContentControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContentControl">
+                    <Image>
+                        <Image.Source>
+                            <DrawingImage>
+                                <DrawingImage.Drawing>
+                                    <DrawingGroup Opacity="1">
+                                        <DrawingGroup.Children>
+                                            <GeometryDrawing x:Name="GeometryName" Brush="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}" Pen="{x:Null}">
+                                                <GeometryDrawing.Geometry>
+                                                    <PathGeometry FillRule="Nonzero" Figures="M3,3L3,5 21,5 21,3z M3,7L3,9 16,9 16,7z M3,11L3,13 21,13 21,11z M3,15L3,17 16,17 16,15z M3,19L3,21 21,21 21,19z" />
+                                                </GeometryDrawing.Geometry>
+                                            </GeometryDrawing>
+                                        </DrawingGroup.Children>
+                                    </DrawingGroup>
+                                </DrawingImage.Drawing>
+                            </DrawingImage>
+                        </Image.Source>
+                    </Image>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="closeAll" TargetType="{x:Type ContentControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContentControl">
+                    <Image>
+                        <Image.Source>
+                            <DrawingImage>
+                                <DrawingImage.Drawing>
+                                    <DrawingGroup Opacity="1">
+                                        <DrawingGroup.Children>
+                                            <GeometryDrawing x:Name="GeometryName" Brush="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}" Pen="{x:Null}">
+                                                <GeometryDrawing.Geometry>
+                                                    <PathGeometry FillRule="Nonzero" Figures="M4,3C3.449219,3 3,3.449219 3,4 3,4.550781 3.449219,5 4,5 4.550781,5 5,4.550781 5,4 5,3.449219 4.550781,3 4,3z M8,3C7.449219,3 7,3.449219 7,4 7,4.550781 7.449219,5 8,5 8.550781,5 9,4.550781 9,4 9,3.449219 8.550781,3 8,3z M13,3C11.898438,3,11,3.898438,11,5L11,19C11,20.101563,11.898438,21,13,21L14.753906,21 15.753906,20 14.75,19 14.578125,18.828125C13.800781,18.046875,13.800781,16.78125,14.578125,16L15.996094,14.585938C16.382813,14.195313 16.894531,14 17.40625,14 17.921875,14 18.433594,14.195313 18.824219,14.585938L19,14.765625 19.996094,15.757813 20,15.753906 20,15.75 21,14.753906 21,9C21,7.898438,20.101563,7,19,7L18,7 18,5C18,3.898438,17.101563,3,16,3z M4,7C3.449219,7 3,7.449219 3,8 3,8.550781 3.449219,9 4,9 4.550781,9 5,8.550781 5,8 5,7.449219 4.550781,7 4,7z M4,11C3.449219,11 3,11.449219 3,12 3,12.550781 3.449219,13 4,13 4.550781,13 5,12.550781 5,12 5,11.449219 4.550781,11 4,11z M4,15C3.449219,15 3,15.449219 3,16 3,16.550781 3.449219,17 4,17 4.550781,17 5,16.550781 5,16 5,15.449219 4.550781,15 4,15z M22.585938,15.996094L19.996094,18.585938 17.40625,16 15.996094,17.414063 18.578125,20 16,22.578125 17.414063,23.996094 19.996094,21.414063 22.578125,24 23.996094,22.585938 21.40625,20 24,17.40625z M4,19C3.449219,19 3,19.449219 3,20 3,20.550781 3.449219,21 4,21 4.550781,21 5,20.550781 5,20 5,19.449219 4.550781,19 4,19z M8,19C7.449219,19 7,19.449219 7,20 7,20.550781 7.449219,21 8,21 8.550781,21 9,20.550781 9,20 9,19.449219 8.550781,19 8,19z" />
+                                                </GeometryDrawing.Geometry>
+                                            </GeometryDrawing>
+                                        </DrawingGroup.Children>
+                                    </DrawingGroup>
+                                </DrawingImage.Drawing>
+                            </DrawingImage>
+                        </Image.Source>
+                    </Image>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="addFile" TargetType="{x:Type ContentControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContentControl">
+                    <Image>
+                        <Image.Source>
+                            <DrawingImage>
+                                <DrawingImage.Drawing>
+                                    <DrawingGroup Opacity="1">
+                                        <DrawingGroup.Children>
+                                            <GeometryDrawing x:Name="GeometryName" Brush="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}" Pen="{x:Null}">
+                                                <GeometryDrawing.Geometry>
+                                                    <PathGeometry FillRule="Nonzero" Figures="M14,2L6,2C4.898438,2,4,2.898438,4,4L4,20C4,21.101563,4.898438,22,6,22L18,22C19.101563,22,20,21.101563,20,20L20,8z M15,14L13,14 13,16C13,16.550781 12.550781,17 12,17 11.449219,17 11,16.550781 11,16L11,14 9,14C8.449219,14 8,13.550781 8,13 8,12.449219 8.449219,12 9,12L11,12 11,10C11,9.449219 11.449219,9 12,9 12.550781,9 13,9.449219 13,10L13,12 15,12C15.550781,12 16,12.449219 16,13 16,13.550781 15.550781,14 15,14z" />
+                                                </GeometryDrawing.Geometry>
+                                            </GeometryDrawing>
+                                        </DrawingGroup.Children>
+                                    </DrawingGroup>
+                                </DrawingImage.Drawing>
+                            </DrawingImage>
+                        </Image.Source>
+                    </Image>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="newExplorer" TargetType="{x:Type ContentControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContentControl">
+                    <Image>
+                        <Image.Source>
+                            <DrawingImage>
+                                <DrawingImage.Drawing>
+                                    <DrawingGroup Opacity="1">
+                                        <DrawingGroup.Children>
+                                            <GeometryDrawing x:Name="GeometryName" Brush="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}" Pen="{x:Null}">
+                                                <GeometryDrawing.Geometry>
+                                                    <PathGeometry FillRule="Nonzero" Figures="M16,16C11.59375,16,8,19.59375,8,24L8,72C8,76.40625,11.59375,80,16,80L48.3125,80C48.125,78.6875 48,77.359375 48,76 48,60.53125 60.53125,48 76,48 80.296875,48 84.359375,49 88,50.734375L88,32C88,27.59375,84.40625,24,80,24L51.3125,24C49.1875,24,47.15625,23.15625,45.65625,21.65625L42.34375,18.34375C40.84375,16.84375,38.8125,16,36.6875,16z M76.03125,56.0625C70.921875,56.0625 65.8125,58.015625 61.921875,61.921875 58.015625,65.828125 56.046875,70.921875 56.046875,76.03125 56.046875,81.140625 58.015625,86.234375 61.921875,90.140625 69.71875,97.953125 82.328125,97.953125 90.140625,90.140625 97.953125,82.328125 97.953125,69.71875 90.140625,61.90625 86.234375,58.015625 81.140625,56.0625 76.03125,56.0625z M76.046875,64C78.25,64.015625,80.046875,65.796875,80.046875,68L80.046875,72 84.046875,72C86.25,72 88.046875,73.796875 88.046875,76 88.046875,78.21875 86.25,80 84.046875,80L80.046875,80 80.046875,84C80.046875,86.21875 78.25,88 76.046875,88 73.84375,88 72.046875,86.21875 72.046875,84L72.046875,80 68.046875,80C65.84375,80 64.046875,78.21875 64.046875,76 64.046875,73.796875 65.84375,72 68.046875,72L72.046875,72 72.046875,68C72.046875,65.796875,73.84375,64,76.046875,64z" />
+                                                </GeometryDrawing.Geometry>
+                                            </GeometryDrawing>
+                                        </DrawingGroup.Children>
+                                    </DrawingGroup>
+                                </DrawingImage.Drawing>
+                            </DrawingImage>
+                        </Image.Source>
+                    </Image>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="openExplorer" TargetType="{x:Type ContentControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContentControl">
+                    <Image>
+                        <Image.Source>
+                            <DrawingImage>
+                                <DrawingImage.Drawing>
+                                    <DrawingGroup Opacity="1">
+                                        <DrawingGroup.Children>
+                                            <GeometryDrawing x:Name="GeometryName" Brush="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}" Pen="{x:Null}">
+                                                <GeometryDrawing.Geometry>
+                                                    <PathGeometry FillRule="Nonzero" Figures="M400,120L240,120 200,80 80,80C57.96875,80,40,97.96875,40,120L40,360C40,382.03125,57.96875,400,80,400L400,400C422.03125,400,440,382.03125,440,360L440,160C440,137.96875,422.03125,120,400,120z" />
+                                                </GeometryDrawing.Geometry>
+                                            </GeometryDrawing>
+                                        </DrawingGroup.Children>
+                                    </DrawingGroup>
+                                </DrawingImage.Drawing>
+                            </DrawingImage>
+                        </Image.Source>
+                    </Image>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="add" TargetType="{x:Type ContentControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContentControl">
+                    <Image>
+                        <Image.Source>
+                            <DrawingImage>
+                                <DrawingImage.Drawing>
+                                    <DrawingGroup Opacity="1">
+                                        <DrawingGroup.Children>
+                                            <GeometryDrawing x:Name="GeometryName" Brush="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}" Pen="{x:Null}">
+                                                <GeometryDrawing.Geometry>
+                                                    <PathGeometry FillRule="Nonzero" Figures="M94.546875,23.636719C89.804688,23.636719,86.667969,26.777344,86.667969,31.515625L86.667969,86.667969 31.515625,86.667969C26.777344,86.667969,23.636719,89.804688,23.636719,94.546875L23.636719,110.304688C23.636719,115.042969,26.777344,118.183594,31.515625,118.183594L86.667969,118.183594 86.667969,173.332031C86.667969,178.074219,89.804688,181.210938,94.546875,181.210938L110.304688,181.210938C115.042969,181.210938,118.183594,178.074219,118.183594,173.332031L118.183594,118.183594 173.332031,118.183594C178.074219,118.183594,181.210938,115.042969,181.210938,110.304688L181.210938,94.546875C181.210938,89.804688,178.074219,86.667969,173.332031,86.667969L118.183594,86.667969 118.183594,31.515625C118.183594,26.777344,115.042969,23.636719,110.304688,23.636719z" />
+                                                </GeometryDrawing.Geometry>
+                                            </GeometryDrawing>
+                                        </DrawingGroup.Children>
+                                    </DrawingGroup>
+                                </DrawingImage.Drawing>
+                            </DrawingImage>
+                        </Image.Source>
+                    </Image>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="sub" TargetType="{x:Type ContentControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContentControl">
+                    <Image>
+                        <Image.Source>
+                            <DrawingImage>
+                                <DrawingImage.Drawing>
+                                    <DrawingGroup Opacity="1">
+                                        <DrawingGroup.Children>
+                                            <GeometryDrawing x:Name="GeometryName" Brush="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}" Pen="{x:Null}">
+                                                <GeometryDrawing.Geometry>
+                                                    <PathGeometry FillRule="Nonzero" Figures="M173.332031,118.183594L31.515625,118.183594C26.777344,118.183594,23.636719,115.042969,23.636719,110.304688L23.636719,94.546875C23.636719,89.804688,26.777344,86.667969,31.515625,86.667969L173.332031,86.667969C178.074219,86.667969,181.210938,89.804688,181.210938,94.546875L181.210938,110.304688C181.210938,115.042969,178.074219,118.183594,173.332031,118.183594z" />
+                                                </GeometryDrawing.Geometry>
+                                            </GeometryDrawing>
+                                        </DrawingGroup.Children>
+                                    </DrawingGroup>
+                                </DrawingImage.Drawing>
+                            </DrawingImage>
+                        </Image.Source>
+                    </Image>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="create_table" TargetType="{x:Type ContentControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContentControl">
+                    <Image>
+                        <Image.Source>
+                            <DrawingImage>
+                                <DrawingImage.Drawing>
+                                    <DrawingGroup Opacity="1">
+                                        <DrawingGroup.Children>
+                                            <GeometryDrawing x:Name="GeometryName" Brush="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}" Pen="{x:Null}">
+                                                <GeometryDrawing.Geometry>
+                                                    <PathGeometry FillRule="Nonzero" Figures="M100,40C77.96875,40,60,57.96875,60,80L60,400C60,422.03125,77.96875,440,100,440L253.671875,440C247.734375,427.578125,242.03125,414.140625,240,400L240,320 253.671875,320C260.78125,305,270.390625,291.484375,282.109375,280L240,280 240,200 340,200 340,245.9375C352.65625,242.109375,366.09375,240,380,240L380,80C380,57.96875,362.03125,40,340,40z M100,80L200,80 200,160 100,160z M240,80L340,80 340,160 240,160z M100,200L200,200 200,280 100,280z M380,280C324.765625,280 280,324.765625 280,380 280,435.234375 324.765625,480 380,480 435.234375,480 480,435.234375 480,380 480,324.765625 435.234375,280 380,280z M100,320L200,320 200,400 100,400z M360,320L400,320 400,360 440,360 440,400 400,400 400,440 360,440 360,400 320,400 320,360 360,360z" />
+                                                </GeometryDrawing.Geometry>
+                                            </GeometryDrawing>
+                                        </DrawingGroup.Children>
+                                    </DrawingGroup>
+                                </DrawingImage.Drawing>
+                            </DrawingImage>
+                        </Image.Source>
+                    </Image>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="warning" TargetType="{x:Type ContentControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContentControl">
+                    <Image>
+                        <Image.Source>
+                            <DrawingImage>
+                                <DrawingImage.Drawing>
+                                    <DrawingGroup Opacity="1">
+                                        <DrawingGroup.Children>
+                                            <GeometryDrawing Brush="#FFFFC107" Pen="{x:Null}">
+                                                <GeometryDrawing.Geometry>
+                                                    <PathGeometry FillRule="Nonzero" Figures="M80,80L16,80C14.566406,80 13.246094,79.234375 12.53125,77.992188 11.820313,76.75 11.824219,75.222656 12.546875,73.984375L44.546875,17.984375C45.261719,16.757813 46.578125,16 48,16 49.421875,16 50.738281,16.757813 51.457031,17.984375L83.457031,73.984375C84.179688,75.222656 84.183594,76.75 83.46875,77.992188 82.757813,79.234375 81.433594,80 80,80z" />
+                                                </GeometryDrawing.Geometry>
+                                            </GeometryDrawing>
+                                            <GeometryDrawing Brush="#FF5D4037" Pen="{x:Null}">
+                                                <GeometryDrawing.Geometry>
+                                                    <PathGeometry FillRule="Nonzero" Figures="M44,68.285156C44,67.746094 44.09375,67.253906 44.285156,66.792969 44.472656,66.335938 44.742188,65.941406 45.09375,65.609375 45.433594,65.273438 45.855469,65.011719 46.339844,64.820313 46.828125,64.636719 47.375,64.539063 47.988281,64.539063 48.601563,64.539063 49.152344,64.636719 49.644531,64.820313 50.144531,65.011719 50.566406,65.273438 50.90625,65.609375 51.257813,65.941406 51.527344,66.335938 51.714844,66.792969 51.90625,67.253906 52,67.746094 52,68.285156 52,68.824219 51.90625,69.316406 51.714844,69.765625 51.527344,70.214844 51.257813,70.601563 50.90625,70.941406 50.566406,71.273438 50.144531,71.53125 49.644531,71.722656 49.152344,71.90625 48.601563,72 47.988281,72 47.375,72 46.828125,71.90625 46.339844,71.722656 45.855469,71.53125 45.433594,71.269531 45.09375,70.9375 44.742188,70.601563 44.472656,70.210938 44.285156,69.761719 44.09375,69.3125 44,68.820313 44,68.285156 M50.960938,60L45.015625,60 44.171875,36 51.800781,36z" />
+                                                </GeometryDrawing.Geometry>
+                                            </GeometryDrawing>
+                                        </DrawingGroup.Children>
+                                    </DrawingGroup>
+                                </DrawingImage.Drawing>
+                            </DrawingImage>
+                        </Image.Source>
+                    </Image>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style x:Key="compare" TargetType="{x:Type ContentControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContentControl">
+                    <Image>
+                        <Image.Source>
+                            <DrawingImage>
+                                <DrawingImage.Drawing>
+                                    <DrawingGroup Opacity="1">
+                                        <DrawingGroup.Children>
+                                            <GeometryDrawing x:Name="GeometryName" Brush="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}" Pen="{x:Null}">
+                                                <GeometryDrawing.Geometry>
+                                                    <PathGeometry FillRule="Nonzero" Figures="M64,64L64,96 256,96 256,160 224,160 224,320 64,320 64,352 224,352 224,448 448,448 448,416 256,416 256,192 448,192 448,160 288,160 288,64z M147.5,140.5L124.5,163.5 153,192 64,192 64,224 153,224 124.5,252.5 147.5,275.5 203.5,219.5 214.5,208 203.5,196.5z M364.5,240L297.5,307 308.5,318.5 364.5,374.5 387.5,352 356,320 448,320 448,288 362,288 387.5,262.5z" />
+                                                </GeometryDrawing.Geometry>
+                                            </GeometryDrawing>
+                                        </DrawingGroup.Children>
+                                    </DrawingGroup>
+                                </DrawingImage.Drawing>
+                            </DrawingImage>
+                        </Image.Source>
+                    </Image>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

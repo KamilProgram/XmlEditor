@@ -1,0 +1,119 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:XmlEditor.Views.Components">
+    
+    <ContentControl x:Key="TableTmp" Style="{StaticResource table}"/>
+    <ContentControl x:Key="PageTmp" Style="{StaticResource page}"/>
+    
+    <Style TargetType="StackPanel" x:Key="ToolBar">
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="Margin" Value="5,7,5,7"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Orientation" Value="Horizontal"/>
+        <Style.Resources>
+            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ToolBtn}">
+                <Setter Property="Padding" Value="8,8,11,8"/>
+                <!--<Setter Property="ToolTipService.IsEnabled" Value="{Binding ElementName=ToolTipVisible, Path=IsChecked}"/>-->
+            </Style>
+        </Style.Resources>
+    </Style>
+    
+    <StackPanel x:Key="WorkTool" Style="{StaticResource ToolBar}">
+        <!--Visibility="{Binding ElementName=ToolPnlVisible, Path=IsChecked,Converter={StaticResource btv}}"-->
+
+        <ToggleButton x:Name="CollapseExploer" IsChecked="{Binding WorkspaceVisible}">
+            <ToggleButton.Style>
+                <Style TargetType="ToggleButton" BasedOn="{StaticResource CleanToogleBtn}">
+                    <Setter Property="Padding" Value="8,8,11,8"/>
+                    <Setter Property="Height" Value="46"/>
+                    <Setter Property="Foreground" Value="{StaticResource LightBrush1}"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsChecked" Value="true">
+                            <Setter Property="Foreground" Value="{StaticResource LightBrush2}"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Foreground" Value="{StaticResource LightBrush2}"/>
+                        </Trigger>
+                    </Style.Triggers>
+
+                </Style>
+            </ToggleButton.Style>
+            <ContentControl Style="{StaticResource explorer}"/>
+        </ToggleButton>
+
+        <Button ToolTip="Открыть файл" Command="{Binding OpenFileCommand}">
+            <ContentControl Style="{StaticResource openFile}"/>
+        </Button>
+
+        <Button ToolTip="Перезагрузить из файла" Command="{Binding UpdateFileCommand}" Height="42">
+            <ContentControl Style="{StaticResource updateFile}"/>
+        </Button>
+
+        <Button ToolTip="Сохранить" Command="{Binding SaveCommand}">
+            <ContentControl Style="{StaticResource save}"/>
+        </Button>
+
+        <Button ToolTip="Сохранить как" Command="{Binding SaveAsCommand}"  Height="43">
+            <ContentControl Style="{StaticResource saveAs}"/>
+        </Button>
+
+        <Button ToolTip="Копировать путь" Command="{Binding CopyPathCommand}" Height="43">
+            <ContentControl Style="{StaticResource copyPath}"/>
+        </Button>
+
+        <Button ToolTip="Копировать название" Command="{Binding CopyNameCommand}" Height="45">
+            <ContentControl Style="{StaticResource copyName}"/>
+        </Button>
+       <!-- <Button ToolTip="Создать таблицу" Command="{Binding CreateTableCommand}" Height="45">
+            <ContentControl Style="{StaticResource create_table}"/>
+        </Button>-->
+
+
+
+
+        <!--<StackPanel.Resources>
+            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ToolBtn}">
+                <Setter Property="Padding" Value="8,8,11,8"/>
+            </Style>
+        </StackPanel.Resources>-->
+        <Button ToolTip="Сменить тип данных" x:Name="TmpBtn" Command="{Binding ChangePageCommand}">
+
+            <Button.Style>
+                <Style TargetType="Button" BasedOn="{StaticResource ToolBtn}">
+                    <Setter Property="Padding" Value="7"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding CurrentPage.Name}" Value="Browser">
+                            <Setter Property="Content">
+                                <Setter.Value>
+                                    <ContentControl Style="{StaticResource page}"/>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding CurrentPage.Name}" Value="Table">
+                            <Setter Property="Content">
+                                <Setter.Value>
+                                    <ContentControl Style="{StaticResource table}"/>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <!-- <DynamicResource  ResourceKey="PageTmp"/>-->
+        </Button>
+
+       <!-- <Button  ToolTip="Сопоставить" Command="{Binding CurrentPageTab}">
+            <ContentControl Style="{StaticResource compare}"/>
+        </Button>-->
+        
+        <Button  ToolTip="Перегенерировать F5" Command="{Binding TransformCommand}">
+            <ContentControl Style="{StaticResource update}"/>
+        </Button>
+
+    </StackPanel>
+
+    <!--
+    <StackPanel x:Key="RenderTool" Orientation="Horizontal" Style="{StaticResource ToolBar}">
+       
+    </StackPanel>-->
+</ResourceDictionary>

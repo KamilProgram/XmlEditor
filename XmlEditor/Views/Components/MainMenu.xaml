@@ -1,0 +1,135 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:XmlEditor.Views.Components">
+
+    <Menu IsMainMenu="True" x:Key="MainMenu">
+        <!--Background="{StaticResource DarkBrush4}"-->
+        <MenuItem  Header="Файл" Template="{StaticResource VsMenuTop}" >
+            <MenuItem Header="Создать"  Command="{Binding NewFileCommand}"  Template="{StaticResource VsMenuSub}" />
+            <MenuItem Header="Открыть" Command="{Binding OpenFileCommand}"  Template="{StaticResource VsMenuSub}"/>
+            <MenuItem Header="Перзагрузить файл" Command="{Binding UpdateFileCommand}"  Template="{StaticResource VsMenuSub}" />
+
+            <Separator Template="{StaticResource VsMenuSep}" />
+
+            <MenuItem Header="Открыть новую папку" Command="{Binding NewFolderCommand}"  Template="{StaticResource VsMenuSub}"/>
+            <MenuItem Header="Открыть робочую папку" Command="{Binding OpenFolderCommand}"  Template="{StaticResource VsMenuSub}"/>
+            <MenuItem Header="Перезагрузить рабочую папку" Command="{Binding UpdateFolderCommand}"  Template="{StaticResource VsMenuSub}"/>
+
+            <Separator Template="{StaticResource VsMenuSep}" />
+
+            <MenuItem Header="Скопировать путь" Command="{Binding CopyPathCommand}"  Template="{StaticResource VsMenuSub}"/>
+            <MenuItem Header="Скопировать название" Command="{Binding CopyNameCommand}"  Template="{StaticResource VsMenuSub}"/>
+            <MenuItem Header="Переименовать" Command="{Binding RenameCommand}"  Template="{StaticResource VsMenuSub}"/>
+            
+            <Separator Template="{StaticResource VsMenuSep}" />
+
+            <MenuItem Header="Сохранить" Command="{Binding SaveCommand}"  Template="{StaticResource VsMenuSub}"/>
+            <MenuItem Header="Сохранить как" Command="{Binding SaveAsCommand}"  Template="{StaticResource VsMenuSub}"/>
+            <Separator Template="{StaticResource VsMenuSep}" />
+            <MenuItem Header="Закрыть все вкладки" Command="{Binding CloseAllItemsCommand}"  Template="{StaticResource VsMenuSub}"/>
+            <!-- <MenuItem Header="Выход"/>-->
+        </MenuItem>
+        <MenuItem Header="Правка" Template="{StaticResource VsMenuTop}">
+            <MenuItem Header="Отмена" InputGestureText="Ctrl+Z" Command="{Binding UndoCommand}"  Template="{StaticResource VsMenuSub}"/>
+            <MenuItem Header="Вернуть" InputGestureText="Ctrl+Y" Command="{Binding RedoCommand}"  Template="{StaticResource VsMenuSub}"/>
+
+            <Separator Template="{StaticResource VsMenuSep}" />
+
+            <MenuItem Header="Вырезать" InputGestureText="Ctrl+X" Command="{Binding CutCommand}"  Template="{StaticResource VsMenuSub}"/>
+            <MenuItem Header="Копировать" InputGestureText="Ctrl+C" Command="{Binding CopyCommand}"  Template="{StaticResource VsMenuSub}"/>
+            <MenuItem Header="Вставить" InputGestureText="Ctrl+V" Command="{Binding PasteCommand}"  Template="{StaticResource VsMenuSub}"/>
+
+            <Separator Template="{StaticResource VsMenuSep}"/>
+
+            <MenuItem Header="Найти" InputGestureText="Ctrl+F" Command="{Binding FindCommand}"  Template="{StaticResource VsMenuSub}"/>
+            <MenuItem Header="Заменить" InputGestureText="Ctrl+H" Command="{Binding ChangeCommand}"  Template="{StaticResource VsMenuSub}"/>
+
+           <!-- <Separator Template="{StaticResource VsMenuSep}"/>
+
+            <MenuItem Header="HotKeys" Command="{Binding HotKeysCommand}"  Template="{StaticResource VsMenuSub}"/>
+            -->
+            
+        </MenuItem>
+        <MenuItem Header="Вид" Template="{StaticResource VsMenuTop}">
+
+            <MenuItem Name="ToolPnlVisible" Header="Панель инструментов"  IsChecked="{Binding ToolsVisible,Mode=TwoWay}" IsCheckable="True" Template="{StaticResource VsMenuSub}" />
+            <!--<MenuItem Name="CodeVisible" Header="Код" IsChecked="True" IsCheckable="True"/>-->
+            <MenuItem Name="RenderVisible" Header="Браузер/Таблица" IsChecked="{Binding RenderVisible,Mode=TwoWay}" IsCheckable="True" Template="{StaticResource VsMenuSub}"/>
+            <MenuItem Name="ExplorerVisible" Header="Проводник" IsChecked="{Binding WorkspaceVisible, Mode=TwoWay}" IsCheckable="True" Template="{StaticResource VsMenuSub}"/>
+            <MenuItem Name="ToolTipVisible" Header="Подсказки" IsChecked="{Binding ToolTipVisible}" IsCheckable="True"  Template="{StaticResource VsMenuSub}"/>
+            <MenuItem Name="TagPnlVisible" Header="Панель тэгов" IsChecked="{Binding TagVisible,Mode=TwoWay}" IsCheckable="True"  Template="{StaticResource VsMenuSub}"/>
+            <Separator Template="{StaticResource VsMenuSep}" />
+
+            <MenuItem Header="Цвета" Template="{StaticResource VsMenuSub}">
+                <MenuItem Header="Атрибут" Command="{Binding RepaintStyleCommand}" CommandParameter="Attribute"  Template="{StaticResource VsMenuSub}"/>
+                <MenuItem Header="Значение атрибута" Command="{Binding RepaintStyleCommand}" CommandParameter="AttributeValue"  Template="{StaticResource VsMenuSub}"/>
+                <MenuItem Header="Тэги" Command="{Binding RepaintStyleCommand}" CommandParameter="TagName"  Template="{StaticResource VsMenuSub}"/>
+                <!--\<MenuItem Header="Скобки" Command="{Binding RepaintStyleCommand}" CommandParameter="TagBracket"  Template="{StaticResource VsMenuSub}"/>-->
+                <MenuItem Header="Комментарие" Command="{Binding RepaintStyleCommand}" CommandParameter="Comment"  Template="{StaticResource VsMenuSub}"/>
+
+                <Separator Template="{StaticResource VsMenuSep}" />
+
+                <MenuItem Header="Цвета по умолчанию" Command="{Binding DefaultStyleCommand}"  Template="{StaticResource VsMenuSub}"/>
+            </MenuItem>
+        </MenuItem>
+        <MenuItem Header="Сервис" Template="{StaticResource VsMenuTop}">
+            <MenuItem Header="Перегенерировать" Command="{Binding TransformCommand}" Template="{StaticResource VsMenuSub}"/>
+
+
+            <!--<MenuItem Header="Авторендер" IsChecked="{Binding OnAutoTransform, UpdateSourceTrigger=PropertyChanged}" IsCheckable="True"  Template="{StaticResource VsMenuSub}"/>-->
+            <MenuItem Header="Автопереход" IsChecked="{Binding OnCurrentPageTab, UpdateSourceTrigger=PropertyChanged}" IsCheckable="True"  Template="{StaticResource VsMenuSub}"/>
+            <MenuItem Header="Тип данных"  Template="{StaticResource VsMenuSub}">
+                <MenuItem x:Name="Browser"  Header="Html" IsCheckable="True"  Command="{Binding ChangePageCommand}" Template="{StaticResource VsMenuSub}">
+                    <MenuItem.Style>
+                        <Style TargetType="MenuItem">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding CurrentPage.Name}" Value="Browser">
+                                    <Setter Property="IsChecked" Value="True"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </MenuItem.Style>
+                </MenuItem>
+                <MenuItem x:Name="Table" Header="Таблица" IsCheckable="True"  Command="{Binding ChangePageCommand}" Template="{StaticResource VsMenuSub}">
+                    <MenuItem.Style>
+                        <Style TargetType="MenuItem">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding CurrentPage.Name}" Value="Table">
+                                    <Setter Property="IsChecked" Value="True"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </MenuItem.Style>
+                </MenuItem>
+            </MenuItem>
+           
+            <MenuItem Header="Шаблон документа"  Template="{StaticResource VsMenuSub}">
+                <MenuItem x:Name="HtmlTmp1" Header="serna" IsCheckable="True" Command="{Binding ChangeXsltCommand}" Template="{StaticResource VsMenuSub}">
+                    <MenuItem.Style>
+                        <Style TargetType="MenuItem">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding MyXslt}" Value="serna">
+                                    <Setter Property="IsChecked" Value="True"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </MenuItem.Style>
+                </MenuItem>
+                <MenuItem x:Name="HtmlTmp2" Header="tg_builder" IsCheckable="True" Command="{Binding ChangeXsltCommand}" Template="{StaticResource VsMenuSub}">
+                    <MenuItem.Style>
+                        <Style TargetType="MenuItem">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding MyXslt}" Value="tg_builder">
+                                    <Setter Property="IsChecked" Value="True"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </MenuItem.Style>
+                </MenuItem>
+            </MenuItem>
+        </MenuItem>
+        <MenuItem Header="Справка" Template="{StaticResource VsMenuTop}" >
+            <MenuItem Header="О программе"  Template="{StaticResource VsMenuSub}"/>
+        </MenuItem>
+    </Menu>
+</ResourceDictionary>
