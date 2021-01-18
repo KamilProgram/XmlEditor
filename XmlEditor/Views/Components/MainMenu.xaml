@@ -76,7 +76,7 @@
             <MenuItem Header="Перегенерировать" Command="{Binding TransformCommand}" Template="{StaticResource VsMenuSub}"/>
 
 
-            <!--<MenuItem Header="Авторендер" IsChecked="{Binding OnAutoTransform, UpdateSourceTrigger=PropertyChanged}" IsCheckable="True"  Template="{StaticResource VsMenuSub}"/>-->
+            <MenuItem Header="Авторендер" IsChecked="{Binding OnAutoTransform, UpdateSourceTrigger=PropertyChanged}" IsCheckable="True"  Template="{StaticResource VsMenuSub}"/>
             <MenuItem Header="Автопереход" IsChecked="{Binding OnCurrentPageTab, UpdateSourceTrigger=PropertyChanged}" IsCheckable="True"  Template="{StaticResource VsMenuSub}"/>
             <MenuItem Header="Тип данных"  Template="{StaticResource VsMenuSub}">
                 <MenuItem x:Name="Browser"  Header="Html" IsCheckable="True"  Command="{Binding ChangePageCommand}" Template="{StaticResource VsMenuSub}">

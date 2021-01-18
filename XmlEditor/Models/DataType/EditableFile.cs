@@ -1,5 +1,4 @@
-﻿using FastColoredTextBoxNS;
-using ICSharpCode.AvalonEdit.Document;
+﻿using ICSharpCode.AvalonEdit.Document;
 using XmlEditor.Models.DataType.AvalonEditor;
 using System;
 using System.Collections.Generic;

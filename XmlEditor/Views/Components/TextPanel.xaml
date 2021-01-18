@@ -193,7 +193,13 @@
 
     </Grid>
 
-    <Grid x:Key="RenderPanel">
+
+    <Grid  x:Key="RenderPanel">
+        <Frame Panel.ZIndex="1" Grid.Column="0" NavigationUIVisibility="Hidden"  Background="{StaticResource DarkBrush1}"
+                   Content="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=DataContext.CurrentPage}" />
+    </Grid>
+    
+    <Grid x:Key="RenderPanelBotPanel">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="26"/>

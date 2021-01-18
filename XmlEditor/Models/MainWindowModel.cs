@@ -657,6 +657,7 @@ namespace XmlEditor.Models
                 }
 
             }
+
             else errorXml = true;
 
             return errorXml;

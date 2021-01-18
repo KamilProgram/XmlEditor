@@ -192,39 +192,13 @@
                             </Setter>
                         </Style>
                     </TabControl.Resources>
-
-                    <!-- <i:Interaction.Triggers>
-                <i:EventTrigger EventName="SelectionChanged">
-                    <i:InvokeCommandAction Command="{Binding TransformTabCommand}" CommandParameter="SelectedItem"/>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>-->
-                </TabControl>
-
-            </Grid>
-                <!--<GridSplitter Grid.Column="3" Grid.Row="1" ShowsPreview="True" 
-                          HorizontalAlignment="Center" VerticalAlignment="Stretch" 
-                          Padding="0" Width="4px" Margin="-4,0,0,0" Background="Transparent"/>
-
-            <Border   
-                     dd:DragDrop.IsDropTarget="True"
-                     dd:DragDrop.DropHandler="{Binding}"
-                     Visibility="{Binding ElementName=BrowserVisible,Path=IsChecked,Converter={StaticResource btv}}">
-            </Border>
-            
-                <Frame Grid.Column="4" Grid.Row="1" Content="{Binding CurrentPage}" NavigationUIVisibility="Hidden" Background="{StaticResource DarkBrush1}"
-                       dd:DragDrop.IsDropTarget="True"
-                       dd:DragDrop.DropHandler="{Binding}">
-
-                    
-                <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseDoubleClick">
-                            <i:InvokeCommandAction 
-                   Command="{Binding CurrentPageTab}"/>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding TransformTabCommand}" CommandParameter="SelectedItem"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
-                </Frame>-->
-
-
+                </TabControl>
+            </Grid>
         </Grid>
     </DockPanel>
 </Window>

@@ -1,5 +1,4 @@
-﻿using FastColoredTextBoxNS;
-using System;
+﻿using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -614,7 +613,6 @@ namespace XmlEditor.ViewModels
                 return transformCommand ?? (transformCommand = new RelayCommand(obj =>
                 {
                     CurrentPage = model.Transform(SelectedItem);
-                    //CurrentPage =  model.Transform(SelectedItem);
                 }, (obj) => Items.Count > 0));
             }
         }
@@ -628,7 +626,7 @@ namespace XmlEditor.ViewModels
                 {
                    if (onAutoTransform == true)
                     {
-                        model.Transform(SelectedItem);
+                        CurrentPage = model.Transform(SelectedItem);
                     }                   
                 }, (obj) => Items.Count > 0));
             }
